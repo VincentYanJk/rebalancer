@@ -1,5 +1,5 @@
 import Binance from "binance-api-node";
-import { Asset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio } from "../../model";
+import { Asset, IAsset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio } from "../../model";
 
 export class BinanceClient implements IExchangeClient {
 
@@ -39,5 +39,9 @@ export class BinanceClient implements IExchangeClient {
         }
 
         return portfolio;
+    }
+
+    public async GetAsset(): Promise<IAsset> {
+        throw new Error("Method not implemented.");
     }
 }

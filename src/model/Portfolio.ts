@@ -17,8 +17,6 @@ export class Portfolio implements IPortfolio {
     }
 
     public AddAsset(asset: IAsset): void {
-        if (asset && asset !== undefined) {
-            this.assets.push(asset);
-        }
+        this.assets.push(asset);
     }
 }
