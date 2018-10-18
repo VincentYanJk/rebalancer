@@ -36,5 +36,6 @@ describe("Balances", () => {
         expect(asset).toBeDefined();
         expect(asset).toBeInstanceOf(Asset);
         expect(asset.name).toBe(name);
+        expect(asset.tickers.length).toBeGreaterThanOrEqual(1);
     });
 });

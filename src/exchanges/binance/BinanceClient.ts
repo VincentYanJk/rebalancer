@@ -1,10 +1,11 @@
 import Binance from "binance-api-node";
-import { Asset, IAsset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio } from "../../model";
+// import { Binance as Client } from "binance-api-node";
+import { Asset, IAsset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio, Ticker } from "../../model";
 
 export class BinanceClient implements IExchangeClient {
 
     private config: IExchangeConfig;
-    private binanceClient: any;
+    private binanceClient: any; // Client;
 
     constructor(config: IExchangeConfig) {
 
@@ -42,6 +43,19 @@ export class BinanceClient implements IExchangeClient {
     }
 
     public async GetAsset(name: string): Promise<IAsset> {
-        return new Asset(name);
+
+        const asset = new Asset(name);
+        const tickers = await this.binanceClient.allBookTickers();
+
+        for (const symbol in tickers) {
+            if (symbol.startsWith(name)) {
+
+                const tick = tickers[symbol];
+                const avgPrice = (parseFloat(tick.bidPrice) + parseFloat(tick.askPrice)) / 2;
+                asset.AddTicker(new Ticker(symbol, avgPrice));
+            }
+        }
+
+        return asset;
     }
 }
