@@ -1,7 +1,7 @@
 {
   "name": "rebalancer",
   "version": "1.0.0",
-  "description": "Rebalancing portfolio tool",
+  "description": "Portfolio Rebalancer",
   "main": "index.js",
   "author": "wslyvh",
   "license": "MIT",
