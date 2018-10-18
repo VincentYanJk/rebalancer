@@ -2,5 +2,9 @@ import { IAsset, IPortfolio } from ".";
 
 export interface IExchangeClient {
     GetBalance(): Promise<IPortfolio>;
-    GetAsset(): Promise<IAsset>;
+    GetAsset(name: string): Promise<IAsset>;
+
+    // GetTrades(ticker: string): Promise<any>; // TODO: Any
+    // GetCandles(ticker: string): Promise<any>; // TODO: Any
+    // GetOrderBook(ticker: string): Promise<any>; // TODO: Any
 }

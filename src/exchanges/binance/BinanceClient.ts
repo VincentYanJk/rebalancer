@@ -41,7 +41,7 @@ export class BinanceClient implements IExchangeClient {
         return portfolio;
     }
 
-    public async GetAsset(): Promise<IAsset> {
-        throw new Error("Method not implemented.");
+    public async GetAsset(name: string): Promise<IAsset> {
+        return new Asset(name);
     }
 }
