@@ -16,11 +16,11 @@ describe("Binance Client", () => {
     });
 });
 
-describe("Balances", () => {
-    it("should get balances", async () => {
-        const client = new BinanceClient(config);
+// describe("Balances", () => {
+//     it("should get balances", async () => {
+//         const client = new BinanceClient(config);
 
-        const balances = await client.GetBalance();
-        expect(balances).toBeDefined();
-    });
-});
+//         const balances = await client.GetBalance();
+//         expect(balances).toBeDefined();
+//     });
+// });
