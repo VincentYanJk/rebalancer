@@ -1,4 +1,4 @@
-import { IExchangeConfig, IPortfolio, Portfolio, Asset } from "../../model";
+import { Asset, IExchangeConfig, IPortfolio, Portfolio } from "../../model";
 import { BinanceClient, BinanceConfig } from "./";
 
 let config: IExchangeConfig;
