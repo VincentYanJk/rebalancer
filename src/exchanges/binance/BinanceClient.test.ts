@@ -8,7 +8,7 @@ beforeAll(() => {
 });
 
 describe("Binance Client", () => {
-    it("should create a new instance", () => {
+    it("should create a new client instance", () => {
         const client = new BinanceClient(config);
 
         expect(client).toBeDefined();

@@ -1,7 +1,7 @@
 import { Asset } from ".";
 
 describe("Asset", () => {
-    it("should create a new asset", () => {
+    it("should create a new asset instance", () => {
         const name = "Test";
 
         const client = new Asset(name);

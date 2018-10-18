@@ -2,7 +2,7 @@ import { Portfolio } from "./";
 import { Asset } from "./Asset";
 
 describe("Portfolio", () => {
-    it("should create a new instance", () => {
+    it("should create a new portfolio instance", () => {
         const name = "Test";
 
         const client = new Portfolio(name);
