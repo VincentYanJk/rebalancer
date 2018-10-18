@@ -1,4 +1,4 @@
-import { IExchangeConfig } from "../../model";
+import { IExchangeConfig, IPortfolio, Portfolio } from "../../model";
 import { BinanceClient, BinanceConfig } from "./";
 
 let config: IExchangeConfig;
@@ -16,11 +16,13 @@ describe("Binance Client", () => {
     });
 });
 
-// describe("Balances", () => {
-//     it("should get balances", async () => {
-//         const client = new BinanceClient(config);
+describe("Balances", () => {
+    it("should get balances", async () => {
+        const client = new BinanceClient(config);
 
-//         const balances = await client.GetBalance();
-//         expect(balances).toBeDefined();
-//     });
-// });
+        const balances = await client.GetBalance();
+        expect(balances).toBeDefined();
+        expect(balances).toBeInstanceOf(Portfolio);
+        expect(balances.source).toBe(config.name);
+    });
+});

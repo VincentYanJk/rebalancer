@@ -1,8 +1,9 @@
 import Binance from "binance-api-node";
-import { IExchangeClient, IExchangeConfig } from "../../model";
+import { Asset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio } from "../../model";
 
 export class BinanceClient implements IExchangeClient {
 
+    private config: IExchangeConfig;
     private binanceClient: any;
 
     constructor(config: IExchangeConfig) {
@@ -11,24 +12,32 @@ export class BinanceClient implements IExchangeClient {
             apiKey: config.apiKey,
             apiSecret: config.apiSecret
         });
+        this.config = config;
     }
 
-    public async GetBalance(): Promise<any> {
+    public async GetBalance(): Promise<IPortfolio> {
 
-        const accountInfo = await this.binanceClient.accountInfo({ useServerTime: true });
-        const balances = accountInfo.balances;
+        const portfolio = new Portfolio(this.config.name);
 
-        for (const asset in balances) {
-            const balance = balances[asset];
-            const free = parseFloat(balance.free);
-            const locked = parseFloat(balance.locked);
-            if (free || locked) {
-                balances[asset].total = free + locked;
+        try {
+            const accountInfo = await this.binanceClient.accountInfo({ useServerTime: true });
+            const accountBalance = accountInfo.balances;
+
+            for (const b in accountBalance) {
+                const balance = accountBalance[b];
+                const asset = new Asset(balance.asset);
+                asset.available = parseFloat(balance.free);
+                asset.total = parseFloat(balance.free) + parseFloat(balance.locked);
+
+                if (asset.total) {
+                    portfolio.AddAsset(asset);
+                }
             }
         }
+        catch {
+            console.log("Error getting account balance");
+        }
 
-        return accountInfo.balances.filter((b: any) => {
-            return parseFloat(b.free) || parseFloat(b.locked);
-        });
+        return portfolio;
     }
 }

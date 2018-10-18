@@ -1,3 +1,5 @@
+import { IPortfolio } from ".";
+
 export interface IExchangeClient {
-    GetBalance(): Promise<any>;
+    GetBalance(): Promise<IPortfolio>;
 }
