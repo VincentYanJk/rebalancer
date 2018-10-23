@@ -16,9 +16,9 @@ export class BinanceClient implements IExchangeClient {
         this.config = config;
     }
 
-    public async GetBalance(): Promise<IPortfolio> {
+    public async GetAccountBalance(): Promise<IAsset[]> {
 
-        const portfolio = new Portfolio(this.config.name);
+        const assets = new Array<IAsset>();
 
         try {
             const accountInfo = await this.binanceClient.accountInfo({ useServerTime: true });
@@ -31,7 +31,7 @@ export class BinanceClient implements IExchangeClient {
                 asset.total = parseFloat(balance.free) + parseFloat(balance.locked);
 
                 if (asset.total) {
-                    portfolio.AddAsset(asset);
+                    assets.push(asset);
                 }
             }
         }
@@ -39,10 +39,10 @@ export class BinanceClient implements IExchangeClient {
             console.log("Error getting account balance");
         }
 
-        return portfolio;
+        return assets;
     }
 
-    public async GetAsset(name: string): Promise<IAsset> {
+    public async GetAssetDetails(name: string): Promise<IAsset> {
 
         const asset = new Asset(name);
         const tickers = await this.binanceClient.allBookTickers();
