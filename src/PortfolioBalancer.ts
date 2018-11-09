@@ -14,10 +14,10 @@ export class PortfolioBalancer {
         const portfolio = new Portfolio(this.config.name);
 
         const assets = await this.client.GetAccountBalance();
-        assets.forEach(async a => {
+        for (const a of assets) {
             const asset = await this.client.GetAssetDetails(a.name);
             portfolio.AddAsset(asset);
-        });
+        }
 
         return portfolio;
     }
