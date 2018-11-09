@@ -17,6 +17,6 @@ export class BinanceConfig implements IExchangeConfig {
         this.allocations = new Array<Asset>();
         this.allocations.push(<Asset>{name: "BTC", allocation: 40});
         this.allocations.push(<Asset>{name: "ETH", allocation: 40});
-        this.allocations.push(<Asset>{name: "USD", allocation: 20});
+        this.allocations.push(<Asset>{name: "TUSD", allocation: 20});
     }
 }

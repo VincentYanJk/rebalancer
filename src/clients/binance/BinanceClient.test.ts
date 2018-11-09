@@ -29,7 +29,7 @@ describe("Balances", () => {
         const name = "ETH";
         const client = new BinanceClient(config);
 
-        const asset = await client.GetAssetDetails(name);
+        const asset = await client.GetAssetDetails(new Asset(name));
 
         expect(asset).toBeDefined();
         expect(asset).toBeInstanceOf(Asset);

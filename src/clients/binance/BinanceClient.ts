@@ -42,13 +42,12 @@ export class BinanceClient implements IExchangeClient {
         return assets;
     }
 
-    public async GetAssetDetails(name: string): Promise<IAsset> {
+    public async GetAssetDetails(asset: IAsset): Promise<IAsset> {
 
-        const asset = new Asset(name);
         const tickers = await this.binanceClient.allBookTickers();
 
         for (const symbol in tickers) {
-            if (symbol.startsWith(name)) {
+            if (symbol.startsWith(asset.name)) {
 
                 const tick = tickers[symbol];
                 const avgPrice = (parseFloat(tick.bidPrice) + parseFloat(tick.askPrice)) / 2;
