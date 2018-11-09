@@ -1,6 +1,6 @@
 import Binance from "binance-api-node";
 // import { Binance as Client } from "binance-api-node";
-import { Asset, IAsset, IExchangeClient, IExchangeConfig, IPortfolio, Portfolio, Ticker } from "../../model";
+import { Asset, IAsset, IExchangeClient, IExchangeConfig, Ticker } from "../../model";
 
 export class BinanceClient implements IExchangeClient {
 

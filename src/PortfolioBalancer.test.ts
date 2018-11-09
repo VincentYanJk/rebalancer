@@ -1,12 +1,18 @@
 import { BinanceClient, BinanceConfig } from "./clients/binance";
-import { Portfolio } from "./model";
+import { MockedClient, MockedConfig } from "./clients/mock";
+import { IExchangeClient, IExchangeConfig, Portfolio } from "./model";
 import { PortfolioBalancer } from "./PortfolioBalancer";
 
 describe("Portfolio Balancer", () => {
-    it("should init a new portfolio balancer", () => {
-        const config = new BinanceConfig();
-        const client = new BinanceClient(config);
+    let config: IExchangeConfig;
+    let client: IExchangeClient;
 
+    beforeEach(() => {
+        config = new MockedConfig();
+        client = new MockedClient(config);
+    });
+
+    it("should init a new portfolio balancer", () => {
         const balancer = new PortfolioBalancer(config, client);
 
         expect(balancer).toBeDefined();
@@ -15,8 +21,6 @@ describe("Portfolio Balancer", () => {
     });
 
     it("should get portfolio allocations", async () => {
-        const config = new BinanceConfig();
-        const client = new BinanceClient(config);
         const balancer = new PortfolioBalancer(config, client);
 
         const allocations = await balancer.allocations;
@@ -27,19 +31,16 @@ describe("Portfolio Balancer", () => {
     });
 
     it("should get portfolio", async () => {
-        const config = new BinanceConfig();
-        const client = new BinanceClient(config);
         const balancer = new PortfolioBalancer(config, client);
 
         const balance = await balancer.GetPortfolio();
 
         expect(balance).toBeDefined();
         expect(balance).toBeInstanceOf(Portfolio);
+        expect(balance.assets.length).toBeGreaterThanOrEqual(1);
     });
 
     it("should match account balance with portfolio allocations", async () => {
-        const config = new BinanceConfig();
-        const client = new BinanceClient(config);
         const balancer = new PortfolioBalancer(config, client);
 
         const balance = await balancer.GetPortfolio();
