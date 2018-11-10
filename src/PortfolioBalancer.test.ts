@@ -8,11 +8,11 @@ describe("Portfolio Balancer", () => {
     let client: IExchangeClient;
 
     beforeEach(() => {
-        // config = new MockedConfig();
-        // client = new MockedClient(config);
+        config = new MockedConfig();
+        client = new MockedClient(config);
 
-        config = new BinanceConfig();
-        client = new BinanceClient(config);
+        // config = new BinanceConfig();
+        // client = new BinanceClient(config);
     });
 
     it("should init a new portfolio balancer", () => {
