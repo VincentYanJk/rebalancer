@@ -3,7 +3,7 @@ import { BinanceClient, BinanceConfig } from "./";
 
 let config: IExchangeConfig;
 
-beforeAll(() => {
+beforeEach(() => {
     config = new BinanceConfig();
 });
 

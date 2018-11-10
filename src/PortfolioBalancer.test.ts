@@ -8,8 +8,11 @@ describe("Portfolio Balancer", () => {
     let client: IExchangeClient;
 
     beforeEach(() => {
-        config = new MockedConfig();
-        client = new MockedClient(config);
+        // config = new MockedConfig();
+        // client = new MockedClient(config);
+
+        config = new BinanceConfig();
+        client = new BinanceClient(config);
     });
 
     it("should init a new portfolio balancer", () => {
@@ -33,23 +36,23 @@ describe("Portfolio Balancer", () => {
     it("should get portfolio", async () => {
         const balancer = new PortfolioBalancer(config, client);
 
-        const balance = await balancer.GetPortfolio();
+        const portfolio = await balancer.GetPortfolio();
 
-        expect(balance).toBeDefined();
-        expect(balance).toBeInstanceOf(Portfolio);
-        expect(balance.assets.length).toBeGreaterThanOrEqual(1);
+        expect(portfolio).toBeDefined();
+        expect(portfolio).toBeInstanceOf(Portfolio);
+        expect(portfolio.assets.length).toBeGreaterThanOrEqual(1);
     });
 
     it("should match account balance with portfolio allocations", async () => {
         const balancer = new PortfolioBalancer(config, client);
 
-        const balance = await balancer.GetPortfolio();
+        const portfolio = await balancer.GetPortfolio();
         const allocations = balancer.allocations;
 
-        expect(balance).toBeDefined();
+        expect(portfolio).toBeDefined();
         expect(allocations).toBeDefined();
 
-        for (const asset of balance.assets) {
+        for (const asset of portfolio.assets) {
             const allocated = allocations.find(a => a.name === asset.name);
             expect(allocated).toBeDefined();
         }

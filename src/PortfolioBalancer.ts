@@ -26,6 +26,7 @@ export class PortfolioBalancer {
             portfolio.AddAsset(asset);
         }
 
+        this.portfolio = portfolio;
         return portfolio;
     }
 }
