@@ -58,7 +58,31 @@ describe("Portfolio Balancer", () => {
         }
     });
 
-    it("should calculate account and allocations differences", async () => {
-        console.log("Not implemented..");
+    it("should get portfolio value in BTC", async () => {
+        const balancer = new PortfolioBalancer(config, client);
+
+        const portfolio = await balancer.GetPortfolio();
+        const allocations = balancer.allocations;
+
+        expect(portfolio).toBeDefined();
+        expect(allocations).toBeDefined();
+
+        const expected = 0.2;
+        const actual = portfolio.ValueInBtc;
+        expect(expected).toBe(actual);
+    });
+
+    it("should get portfolio value in USD", async () => {
+        const balancer = new PortfolioBalancer(config, client);
+
+        const portfolio = await balancer.GetPortfolio();
+        const allocations = balancer.allocations;
+
+        expect(portfolio).toBeDefined();
+        expect(allocations).toBeDefined();
+
+        const expected = 1000;
+        const actual = portfolio.ValueInUsd;
+        expect(expected).toBe(actual);
     });
 });

@@ -23,6 +23,7 @@ export class Asset implements IAsset {
     }
 
     AddTicker(ticker: ITicker): void {
+        ticker.value = this.total * ticker.price;
         this.tickers.push(ticker);
     }
 }
