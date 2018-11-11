@@ -1,7 +1,7 @@
 {
   "name": "rebalancer",
   "version": "1.0.0",
-  "description": "Portfolio Rebalancer",
+  "description": "A universal tool to rebalance and manage cryptocurrency portfolio's over different exchanges. ",
   "main": "index.js",
   "author": "wslyvh",
   "license": "MIT",
