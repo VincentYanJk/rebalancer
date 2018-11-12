@@ -21,8 +21,9 @@ export class PortfolioBalancer {
         const portfolio = new Portfolio(this.config.name);
 
         const assets = await this.client.GetAccountBalance();
-        for (const a of assets) {
+        for (const a of assets.filter(a => this.allocations.filter(al => al.name == a.name))) {
             const asset = await this.client.GetAssetDetails(a);
+            asset.allocation = this.allocations.filter(al => al.name == a.name)[0].allocation;
             portfolio.AddAsset(asset);
         }
 
